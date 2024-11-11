@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Interfaces Gráficas con Tkinter</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #005fdb; /* Gris claro del fondo */
+            color: #333;
+        }
+        
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: #fff; /* Blanco del contenedor */
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin-bottom: 10px;
+            text-align: center;
+            color: #333;
+        }
+
+        p {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .code-area {
+            width: 100%;
+            height: 400px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            font-family: monospace;
+            resize: vertical;
+            overflow-y: auto; /* Agrega scroll vertical si el código es largo */
+            background-color: #f0f0f0; /* Gris claro para el área de código */
+        }
+
+        .code-area code { /* Aquí está la corrección */
+            font-size: 16px; /* Ajusta el tamaño de la fuente a tu gusto */
+        }
+
+        .buttons-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #4CAF50; /* Verde del logo de Python */
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049; /* Verde más oscuro al pasar el cursor */
+        }
+
+        .donation-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #FFC107; /* Amarillo del logo de Python */
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .donation-button:hover {
+            background-color: #ffc107; /* Amarillo más oscuro al pasar el cursor */
+        }
+
+        h2 {
+            margin-top: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+        pre {
+            background-color: #f0f0f0; /* Gris claro para el código */
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        code {
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Generador de Interfaces Gráficas con Tkinter para Python</h1>
+
+        <p>Este generador te muestra ejemplos de código para crear interfaces gráficas con Tkinter, una biblioteca de Python.</p>
+
+        <h2 id="ejemplo-titulo">Selecciona un ejemplo</h2>
+
+        <div class="code-area" id="code-area">
+            <!-- Aquí se mostrará el código -->
+        </div>
+
+        <div class="buttons-container">
+            <!-- Botones para los ejemplos -->
+            <button onclick="mostrarCodigo(1, 'Etiqueta')">Ejemplo 1: Etiqueta</button>
+            <button onclick="mostrarCodigo(2, 'Botón')">Ejemplo 2: Botón</button>
+            <button onclick="mostrarCodigo(3, 'Entrada de texto')">Ejemplo 3: Entrada de texto</button>
+            <button onclick="mostrarCodigo(4, 'Cuadro de lista')">Ejemplo 4: Cuadro de lista</button>
+            <button onclick="mostrarCodigo(5, 'Menú')">Ejemplo 5: Menú</button>
+            <button onclick="mostrarCodigo(6, 'Cuadro de diálogo de error')">Ejemplo 6: Cuadro de diálogo de error</button>
+            <button onclick="mostrarCodigo(7, 'Cuadro de diálogo de advertencia')">Ejemplo 7: Cuadro de diálogo de advertencia</button>
+            <button onclick="mostrarCodigo(8, 'Cuadro de diálogo de confirmación')">Ejemplo 8: Cuadro de diálogo de confirmación</button>
+            <button onclick="mostrarCodigo(9, 'Cuadro de diálogo de entrada')">Ejemplo 9: Cuadro de diálogo de entrada</button>
+            <button onclick="mostrarCodigo(10, 'Botón de radio')">Ejemplo 10: Botón de radio</button>
+            <button onclick="mostrarCodigo(11, 'Barra de progreso')">Ejemplo 11: Barra de progreso</button>
+            <button onclick="mostrarCodigo(12, 'Cuadro de lista')">Ejemplo 12: Cuadro de lista</button>
+            <button onclick="mostrarCodigo(13, 'Escala deslizante')">Ejemplo 13: Escala deslizante</button>
+            <button onclick="mostrarCodigo(14, 'Lienzo')">Ejemplo 14: Lienzo</button>
+            <button onclick="mostrarCodigo(15, 'Cuadro de diálogo de mensaje')">Ejemplo 15: Cuadro de diálogo de mensaje</button>
+            <button onclick="mostrarCodigo(16, 'Cuadro de diálogo de contraseña')">Ejemplo 16: Cuadro de diálogo de contraseña</button>
+            <button onclick="mostrarCodigo(17, 'Cuadro de diálogo de selección múltiple')">Ejemplo 17: Cuadro de diálogo de selección múltiple</button>
+            <button onclick="mostrarCodigo(18, 'Cuadro de diálogo de selección de archivo')">Ejemplo 18: Cuadro de diálogo de selección de archivo</button>
+            <button onclick="mostrarCodigo(19, 'Cuadro de diálogo de selección de carpeta')">Ejemplo 19: Cuadro de diálogo de selección de carpeta</button>
+            <button onclick="mostrarCodigo(20, 'Cuadro de diálogo de guardado de archivo')">Ejemplo 20: Cuadro de diálogo de guardado de archivo</button>
+            <button onclick="mostrarCodigo(21, 'Barra de progreso')">Ejemplo 21: Barra de progreso</button>
+            <button onclick="mostrarCodigo(22, 'Escala deslizante')">Ejemplo 22: Escala deslizante</button>
+            <button onclick="mostrarCodigo(23, 'Lienzo')">Ejemplo 23: Lienzo</button>
+            <button onclick="mostrarCodigo(24, 'Cuadro de diálogo de selección de color')">Ejemplo 24: Cuadro de diálogo de selección de color</button>
+        </div>
+
+        <button class="donation-button" onclick="window.open('https://paypal.me/Estebanfederico/donate/?hosted_button_id=your_paypal_button_id', '_blank')">Donar</button>
+    </div>
+
+    <script>
+        function mostrarCodigo(numero, titulo) {
+            // Aquí va el código para cada botón
+            let codeArea = document.getElementById('code-area');
+            let tituloEjemplo = document.getElementById('ejemplo-titulo');
+            tituloEjemplo.textContent = `Ejemplo ${numero}: ${titulo}`; // Actualiza el título
+
+            switch (numero) {
+                case 1:
+                    codeArea.innerHTML = `
+                        <!-- Código del ejemplo 1 -->
+                        <pre>
+                            <code>
+                                import tkinter as tk
+
+                                # Crear la ventana principal
+                                ventana = tk.Tk()
+                                ventana.title("Mi Ventana")
+
+                                # Crear una etiqueta
+                                etiqueta = tk.Label(ventana, text="¡Hola, mundo!", font=("Arial", 16))
+                                etiqueta.pack(pady=20)
+
+                                # Ejecutar la ventana
+                                ventana.mainloop()
+                            </code>
+                        </pre>
+                    `;
+                    break;
+                case 2:
+                    codeArea.innerHTML = `
+                        <!-- Código del ejemplo 2 -->
+                        <pre>
+                            <code>
+                                import tkinter as tk
+
+                                # Crear la ventana principal
+                                ventana = tk.Tk()
+                                ventana.title("Mi Ventana")
+
+                                # Crear un botón
+                                def saludar():
+                                    print("¡Hola!")
+
+                                boton_saludar = tk.Button(ventana, text="Saludar", command=saludar)
+                                boton_saludar.pack(pady=20)
+
+                                # Ejecutar la ventana
+                                ventana.mainloop()
+                            </code>
+                        </pre>
+                    `;
+                    break;
+                case 3:
+                    codeArea.innerHTML = `
+                        <!-- Código del ejemplo 3 -->
+                        <pre>
+                            <code>
+                                import tkinter as tk
+
+                                # Crear la ventana principal
+                                ventana = tk.Tk()
+                                ventana.title("Mi Ventana")
+
+                                # Crear una entrada de texto
+                                entrada_texto = tk.Entry(ventana)
+                                entrada_texto.pack(pady=10)
+
+                                # Crear un botón para mostrar el texto
+                                def mostrar_texto():
+                                    texto = entrada_texto.get()
+                                    print(f"El texto ingresado es: {texto}")
+
+                                boton_mostrar = tk.Button(ventana, text="Mostrar Texto", command=mostrar_texto)
+                                boton_mostrar.pack()
+
+                                # Ejecutar la ventana
+                                ventana.mainloop()
+                            </code>
+                        </pre>
+                    `;
+                    break;
+                case 4:
+                    codeArea.innerHTML = `
+                        <!-- Código del ejemplo 4 -->
+                        <pre>
+                            <code>
+                                import tkinter as tk
+
+                                # Crear la ventana principal
+                                ventana = tk.Tk()
+                                ventana.title("Mi Ventana")
+
+                                # Crear un cuadro de lista
+                                lista = tk.Listbox(ventana)
+                                lista.insert(tk.END, "Opción 1")
+                                lista.insert(tk.END, "Opción 2")
+                                lista.insert(tk.END, "Opción 3")
+                                lista.pack(pady=10)
+
+                                # Ejecutar la ventana
+                                ventana.mainloop()
+                            </code>
+                        </pre>
+                    `;
+                    break;
+                case 5:
+                    codeArea.innerHTML = `
+                        <!-- Código del ejemplo 5 -->
+                        <pre>
+                            <code>
+                                import tkinter as tk
+
+                                # Crear la ventana principal
+                                ventana = tk.Tk()
+                                ventana.title("Mi Ventana")
+
+                                # Crear un menú
+                                menu_bar = tk.Menu(ventana)
+                                ventana.config(menu=menu_bar)
+
+                                # Crear un menú desplegable "Archivo"
+                                menu_archivo = tk.Menu(menu_bar, tearoff=0)
+                                menu_bar.add_cascade(label="Archivo", menu=menu_archivo)
+
+                                # Agregar opciones al menú "Archivo"
+                                menu_archivo.add_command(label="Nuevo", command=lambda: print("Nuevo archivo"))
+                                menu_archivo.add_command(label="Abrir", command=lambda: print("Abrir archivo"))
+                                menu_archivo.add_separator()
+                                menu_archivo.add_command(label="Salir", command=ventana.quit)
+
+                                # Ejecutar la ventana
+                                ventana.mainloop()
+                            </code>
+                        </pre>
+                    `;
+                    break;
+                case 6:
+                    codeArea.innerHTML = `
+                        <!-- Código del ejemplo 6 -->
+                        <pre>
+                            <code>
+                                import tkinter as tk
+                                from tkinter import messagebox
+
+                                # Crear la ventana principal
+                                ventana = tk.Tk()
+                                ventana.title("Mi Ventana")
+
+                                # Crear un cuadro de diálogo de error
+                                def mostrar_error():
+                                    messagebox.showerror("Error", "Ha ocurrido un error.")
+
+                                boton_error = tk.Button(ventana, text="Mostrar Error", command=mostrar_error)
+                                boton_error.pack(pady=20)
+
+                                # Ejecutar la ventana
+                                ventana.mainloop()
+                            </code>
+                        </pre>
+                    `;
+                    break;
+                case 7:
+                    codeArea.innerHTML = `
+                        <!-- Código del ejemplo 7 -->
+                        <pre>
+                            <code>
+                                import tkinter as tk
+                                from tkinter import messagebox
+
+                                # Crear la ventana principal
+                                ventana = tk.Tk()
+                                ventana.title("Mi Ventana")
+
+                                # Crear un cuadro de diálogo de advertencia
+                                def mostrar_advertencia():
+                                    messagebox.showwarning("Advertencia", "Esta es una advertencia.")
+
+                                boton_advertencia = tk.Button(ventana, text="Mostrar Advertencia", command=mostrar_advertencia)
+                                boton_advertencia.pack(pady=20)
+
+                                # Ejecutar la ventana
+                                ventana.mainloop()
+                            </code>
+                        </pre>
+                    `;
+                    break;
+                case 8:
+                    codeArea.innerHTML = `
+                        <!-- Código del ejemplo 8 -->
+                        <pre>
+                            <code>
+                                import tkinter as tk
+                                from tkinter import messagebox
+
+                                # Crear la ventana principal
+                                ventana = tk.Tk()
+                                ventana.title("Mi Ventana")
+
+                                # Crear un cuadro de diálogo de confirmación
+                                def mostrar_confirmacion():
+                                    respuesta = messagebox.askquestion("Confirmación", "¿Estás seguro?")
+                                    if respuesta == 'yes':
+                                        print("Se confirmó la acción.")
+                                    else:
+                                        print("Se canceló la acción.")
+
+                                boton_confirmacion = tk.Button(ventana, text="Mostrar Confirmación", command=mostrar_confirmacion)
+                                boton_confirmacion.pack(pady=20)
+
+                                # Ejecutar la ventana
+                                ventana.mainloop()
+                            </code>
+                        </pre>
+                    `;
+                    break;
+                case 9:
+                    codeArea.innerHTML = `
+                        <!-- Código del ejemplo 9 -->
+                        <pre>
+                            <code>
+                                import tkinter as tk
+                                from tkinter import messagebox
+
+                                # Crear la ventana principal
+                                ventana = tk.Tk()
+                                ventana.title("Mi Ventana")
+
+                                # Crear un cuadro de diálogo de entrada
+                                def obtener_nombre():
+                                    nombre = messagebox.askstring("Nombre", "Ingresa tu nombre:")
+                                    if nombre:
+                                        print(f"Hola, {nombre}!")
+
+                                boton_nombre = tk.Button(ventana, text="Obtener Nombre", command=obtener_nombre)
+                                boton_nombre.pack(pady=20)
+
+                                # Ejecutar la ventana
+                                ventana.mainloop()
+                            </code>
+                        </pre>
+                    `;
+                    break;
+                case 10:
+                    codeArea.innerHTML = `
+                        <!-- Código del ejemplo 10 -->
+                        <pre>
+                            <code>
+                                import tkinter as tk
+
+                                # Crear la ventana principal
+                                ventana = tk.Tk()
+                                ventana.title("Mi Ventana")
+
+                                # Crear un botón de radio
+                                def seleccionar_opcion():
+                                    opcion_seleccionada = var.get()
+                                    print(f"Opción seleccionada: {opcion_seleccionada}")
+
+                                var = tk.IntVar()
+                                radio_boton_1 = tk.Radiobutton(ventana, text="Opción 1", variable=var, value=1, command=seleccionar_opcion)
+                                radio_boton_1.pack(pady=5)
+                                radio_boton_2 = tk.Radiobutton(ventana, text="Opción 2", variable=var, value=2, command=seleccionar_opcion)
+                                radio_boton_2.pack(pady=5)
+
+                                # Ejecutar la ventana
+                                ventana.mainloop()
+                            </code>
+                        </pre>
+                    `;
+                    break;
+                case 11:
+                    codeArea.innerHTML = `
+                        <!-- Código del ejemplo 11 -->
+                        <pre>
+                            <code>
+                                import tkinter as tk
+                                import time
+
+                                # Crear la ventana principal
+                                ventana = tk.Tk()
+                                ventana.title("Mi Ventana")
+
+                                # Crear una barra de progreso
+                                barra_progreso = tk.ttk.Progressbar(ventana, orient="horizontal", length=200, mode="determinate")
+                                barra_progreso.pack(pady=20)
+
+                                # Simular una tarea que tarda tiempo
+                                def realizar_tarea():
+                                    for i in range(101):
+                                        barra_progreso["value"] = i
+                                        ventana.update_idletasks()
+                                        time.sleep(0.05)
+
+                                boton_tarea = tk.Button(ventana, text="Realizar Tarea", command=realizar_tarea)
+                                boton_tarea.pack()
+
+                                # Ejecutar la ventana
+                                ventana.mainloop()
+                            </code>
+                        </pre>
+                    `;
+                    break;
+                case 12:
+                    codeArea.innerHTML = `
+                        <!-- Código del ejemplo 12 -->
+                        <pre>
+                            <code>
+                                import tkinter as tk
+
+                                # Crear la ventana principal
+                                ventana = tk.Tk()
+                                ventana.title("Mi Ventana")
+
+                                # Crear un cuadro de lista
+                                lista = tk.Listbox(ventana)
+                                lista.insert(tk.END, "Opción 1")
+                                lista.insert(tk.END, "Opción 2")
+                                lista.insert(tk.END, "Opción 3")
+                                lista.pack(pady=10)
+
+                                # Ejecutar la ventana
+                                ventana.mainloop()
+                            </code>
+                        </pre>
+                    `;
+                    break;
+                case 13:
+                    codeArea.innerHTML = `
+                        <!-- Código del ejemplo 13 -->
+                        <pre>
+                            <code>
+                                import tkinter as tk
+
+                                # Crear la ventana principal
+                                ventana = tk.Tk()
+                                ventana.title("Mi Ventana")
+
+                                # Crear una escala deslizante
+                                escala = tk.Scale(ventana, from_=0, to=100, orient="horizontal", length=200)
+                                escala.pack(pady=20)
+
+                                # Mostrar el valor de la escala
+                                def mostrar_valor():
+                                    valor = escala.get()
+                                    print(f"El valor de la escala es: {valor}")
+
+                                boton_valor = tk.Button(ventana, text="Mostrar Valor", command=mostrar_valor)
+                                boton_valor.pack()
+
+                                # Ejecutar la ventana
+                                ventana.mainloop()
+                            </code>
+                        </pre>
+                    `;
+                    break;
+                case 14:
+                    codeArea.innerHTML = `
+                        <!-- Código del ejemplo 14 -->
+                        <pre>
+                            <code>
+                                import tkinter as tk
+
+                                # Crear la ventana principal
+                                ventana = tk.Tk()
+                                ventana.title("Mi Ventana")
+
+                                # Crear un lienzo
+                                lienzo = tk.Canvas(ventana, width=400, height=300, bg="white")
+                                lienzo.pack(pady=20)
+
+                                # Dibujar un rectángulo
+                                rectangulo = lienzo.create_rectangle(50, 50, 150, 150, fill="blue")
+
+                                # Ejecutar la ventana
+                                ventana.mainloop()
+                            </code>
+                        </pre>
+                    `;
+                    break;
+                case 15:
+                    codeArea.innerHTML = `
+                        <!-- Código del ejemplo 15 -->
+                        <pre>
+                            <code>
+                                import tkinter as tk
+                                from tkinter import messagebox
+
+                                # Crear la ventana principal
+                                ventana = tk.Tk()
+                                ventana.title("Mi Ventana")
+
+                                # Crear un cuadro de diálogo de mensaje
+                                def mostrar_mensaje():
+                                    messagebox.showinfo("Mensaje", "Este es un mensaje de prueba.")
+
+                                boton_mensaje = tk.Button(ventana, text="Mostrar Mensaje", command=mostrar_mensaje)
+                                boton_mensaje.pack(pady=20)
+
+                                # Ejecutar la ventana
+                                ventana.mainloop()
+                            </code>
+                        </pre>
+                    `;
+                    break;
+                case 16:
+                    codeArea.innerHTML = `
+                        <!-- Código del ejemplo 16 -->
+                        <pre>
+                            <code>
+                                import tkinter as tk
+                                from tkinter import messagebox
+
+                                # Crear la ventana principal
+                                ventana = tk.Tk()
+                                ventana.title("Mi Ventana")
+
+                                # Crear un cuadro de diálogo de contraseña
+                                def obtener_contraseña():
+                                    contraseña = messagebox.askstring("Contraseña", "Ingresa tu contraseña:", show="*")
+                                    if contraseña:
+                                        print(f"La contraseña ingresada es: {contraseña}")
+
+                                boton_contraseña = tk.Button(ventana, text="Obtener Contraseña", command=obtener_contraseña)
+                                boton_contraseña.pack(pady=20)
+
+                                # Ejecutar la ventana
+                                ventana.mainloop()
+                            </code>
+                        </pre>
+                    `;
+                    break;
+                case 17:
+                    codeArea.innerHTML = `
+                        <!-- Código del ejemplo 17 -->
+                        <pre>
+                            <code>
+                                import tkinter as tk
+                                from tkinter import messagebox
+
+                                # Crear la ventana principal
+                                ventana = tk.Tk()
+                                ventana.title("Mi Ventana")
+
+                                # Crear un cuadro de diálogo de selección múltiple
+                                def seleccionar_opciones():
+                                    opciones = messagebox.askquestion("Selección Múltiple", "Selecciona las opciones:")
+                                    if opciones == 'yes':
+                                        print("Se seleccionaron opciones.")
+                                    else:
+                                        print("No se seleccionaron opciones.")
+
+                                boton_seleccion = tk.Button(ventana, text="Seleccionar Opciones", command=seleccionar_opciones)
+                                boton_seleccion.pack(pady=20)
+
+                                # Ejecutar la ventana
+                                ventana.mainloop()
+                            </code>
+                        </pre>
+                    `;
+                    break;
+                case 18:
+                    codeArea.innerHTML = `
+                        <!-- Código del ejemplo 18 -->
+                        <pre>
+                            <code>
+                                import tkinter as tk
+                                from tkinter import filedialog
+
+                                # Crear la ventana principal
+                                ventana = tk.Tk()
+                                ventana.title("Mi Ventana")
+
+                                # Crear un cuadro de diálogo de selección de archivo
+                                def seleccionar_archivo():
+                                    archivo = filedialog.askopenfilename(
+                                        initialdir="/",
+                                        title="Seleccionar archivo",
+                                        filetypes=(("Archivos de texto", "*.txt"), ("Todos los archivos", "*.*"))
+                                    )
+                                    if archivo:
+                                        print(f"Archivo seleccionado: {archivo}")
+
+                                boton_archivo = tk.Button(ventana, text="Seleccionar Archivo", command=seleccionar_archivo)
+                                boton_archivo.pack(pady=20)
+
+                                # Ejecutar la ventana
+                                ventana.mainloop()
+                            </code>
+                        </pre>
+                    `;
+                    break;
+                case 19:
+                    codeArea.innerHTML = `
+                        <!-- Código del ejemplo 19 -->
+                        <pre>
+                            <code>
+                                import tkinter as tk
+                                from tkinter import filedialog
+
+                                # Crear la ventana principal
+                                ventana = tk.Tk()
+                                ventana.title("Mi Ventana")
+
+                                # Crear un cuadro de diálogo de selección de carpeta
+                                def seleccionar_carpeta():
+                                    carpeta = filedialog.askdirectory(
+                                        initialdir="/",
+                                        title="Seleccionar carpeta"
+                                    )
+                                    if carpeta:
+                                        print(f"Carpeta seleccionada: {carpeta}")
+
+                                boton_carpeta = tk.Button(ventana, text="Seleccionar Carpeta", command=seleccionar_carpeta)
+                                boton_carpeta.pack(pady=20)
+
+                                # Ejecutar la ventana
+                                ventana.mainloop()
+                            </code>
+                        </pre>
+                    `;
+                    break;
+                case 20:
+                    codeArea.innerHTML = `
+                        <!-- Código del ejemplo 20 -->
+                        <pre>
+                            <code>
+                                import tkinter as tk
+                                from tkinter import filedialog
+
+                                # Crear la ventana principal
+                                ventana = tk.Tk()
+                                ventana.title("Mi Ventana")
+
+                                # Crear un cuadro de diálogo de guardado de archivo
+                                def guardar_archivo():
+                                    archivo = filedialog.asksaveasfilename(
+                                        defaultextension=".txt",
+                                        filetypes=(("Archivos de texto", "*.txt"), ("Todos los archivos", "*.*"))
+                                    )
+                                    if archivo:
+                                        with open(archivo, "w") as f:
+                                            f.write("Este es el contenido del archivo.")
+                                        print(f"Archivo guardado en: {archivo}")
+
+                                boton_guardar = tk.Button(ventana, text="Guardar Archivo", command=guardar_archivo)
+                                boton_guardar.pack(pady=20)
+
+                                # Ejecutar la ventana
+                                ventana.mainloop()
+                            </code>
+                        </pre>
+                    `;
+                    break;
+                case 21:
+                    codeArea.innerHTML = `
+                        <!-- Código del ejemplo 21 -->
+                        <pre>
+                            <code>
+                                import tkinter as tk
+                                import time
+
+                                # Crear la ventana principal
+                                ventana = tk.Tk()
+                                ventana.title("Mi Ventana")
+
+                                # Crear una barra de progreso
+                                barra_progreso = tk.ttk.Progressbar(ventana, orient="horizontal", length=200, mode="determinate")
+                                barra_progreso.pack(pady=20)
+
+                                # Simular una tarea que tarda tiempo
+                                def realizar_tarea():
+                                    for i in range(101):
+                                        barra_progreso["value"] = i
+                                        ventana.update_idletasks()
+                                        time.sleep(0.05)
+
+                                boton_tarea = tk.Button(ventana, text="Realizar Tarea", command=realizar_tarea)
+                                boton_tarea.pack()
+
+                                # Ejecutar la ventana
+                                ventana.mainloop()
+                            </code>
+                        </pre>
+                    `;
+                    break;
+                case 22:
+                    codeArea.innerHTML = `
+                        <!-- Código del ejemplo 22 -->
+                        <pre>
+                            <code>
+                                import tkinter as tk
+
+                                # Crear la ventana principal
+                                ventana = tk.Tk()
+                                ventana.title("Mi Ventana")
+
+                                # Crear una escala deslizante
+                                escala = tk.Scale(ventana, from_=0, to=100, orient="horizontal", length=200)
+                                escala.pack(pady=20)
+
+                                # Mostrar el valor de la escala
+                                def mostrar_valor():
+                                    valor = escala.get()
+                                    print(f"El valor de la escala es: {valor}")
+
+                                boton_valor = tk.Button(ventana, text="Mostrar Valor", command=mostrar_valor)
+                                boton_valor.pack()
+
+                                # Ejecutar la ventana
+                                ventana.mainloop()
+                            </code>
+                        </pre>
+                    `;
+                    break;
+                case 23:
+                    codeArea.innerHTML = `
+                        <!-- Código del ejemplo 23 -->
+                        <pre>
+                            <code>
+                                import tkinter as tk
+
+                                # Crear la ventana principal
+                                ventana = tk.Tk()
+                                ventana.title("Mi Ventana")
+
+                                # Crear un lienzo
+                                lienzo = tk.Canvas(ventana, width=400, height=300, bg="white")
+                                lienzo.pack(pady=20)
+
+                                # Dibujar un rectángulo
+                                rectangulo = lienzo.create_rectangle(50, 50, 150, 150, fill="blue")
+
+                                # Ejecutar la ventana
+                                ventana.mainloop()
+                            </code>
+                        </pre>
+                    `;
+                    break;
+                case 24:
+                    codeArea.innerHTML = `
+                        <!-- Código del ejemplo 24 -->
+                        <pre>
+                            <code>
+                                import tkinter as tk
+                                from tkinter import colorchooser
+
+                                # Crear la ventana principal
+                                ventana = tk.Tk()
+                                ventana.title("Mi Ventana")
+
+                                # Crear un cuadro de diálogo de selección de color
+                                def seleccionar_color():
+                                    color = colorchooser.askcolor(title="Seleccionar color")
+                                    if color[1]:
+                                        print(f"Color seleccionado: {color[1]}")
+
+                                boton_color = tk.Button(ventana, text="Seleccionar Color", command=seleccionar_color)
+                                boton_color.pack(pady=20)
+
+                                # Ejecutar la ventana
+                                ventana.mainloop()
+                            </code>
+                        </pre>
+                    `;
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>
